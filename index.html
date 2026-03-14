@@ -3,283 +3,161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>InfinityAI</title>
+<title>NovaMind AI</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
 
 body{
-height:100vh;
-background:#0b0f19;
-color:#fff;
-display:flex;
-overflow:hidden;
-}
-
-/* Animated background particles */
-
-canvas{
-position:fixed;
-top:0;
-left:0;
-z-index:-1;
-}
-
-/* Sidebar */
-
-.sidebar{
-width:280px;
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(20px);
-border-right:1px solid rgba(255,255,255,0.1);
-padding:30px;
+background:#0f172a;
+color:white;
 display:flex;
 flex-direction:column;
+height:100vh;
+}
+
+header{
+padding:20px;
+background:#020617;
+border-bottom:1px solid rgba(255,255,255,0.1);
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
 .logo{
-font-size:24px;
 font-weight:800;
-margin-bottom:40px;
+font-size:20px;
 background:linear-gradient(90deg,#00f5a0,#00d9f5);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
 
-.menu a{
-display:block;
-padding:14px;
-border-radius:12px;
-margin-bottom:10px;
-text-decoration:none;
-color:#ccc;
-transition:0.3s;
-}
-
-.menu a:hover{
-background:rgba(255,255,255,0.08);
-color:white;
-}
-
-.upgrade{
-margin-top:auto;
-padding:16px;
-border-radius:14px;
-background:linear-gradient(90deg,#00f5a0,#00d9f5);
-color:#0b0f19;
-text-align:center;
-font-weight:700;
-text-decoration:none;
-transition:0.3s;
-}
-
-.upgrade:hover{transform:scale(1.05)}
-
-/* Main */
-
-.main{
-flex:1;
-display:flex;
-flex-direction:column;
-}
-
-/* Topbar */
-
-.topbar{
-padding:25px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(20px);
-border-bottom:1px solid rgba(255,255,255,0.1);
-}
-
-.status{opacity:0.7;font-size:14px}
-
-/* Chat */
-
 .chat{
 flex:1;
-padding:50px;
 overflow-y:auto;
+padding:30px;
 }
 
 .message{
-max-width:750px;
-margin-bottom:25px;
-padding:22px;
-border-radius:18px;
-line-height:1.6;
-animation:fade .4s ease;
-}
-
-.ai{
-background:rgba(255,255,255,0.07);
-backdrop-filter:blur(10px);
+margin-bottom:20px;
+padding:15px;
+border-radius:10px;
+max-width:700px;
+line-height:1.5;
 }
 
 .user{
-background:linear-gradient(90deg,#00f5a0,#00d9f5);
-color:#0b0f19;
+background:#00d9f5;
+color:black;
 margin-left:auto;
 }
 
-/* Input */
+.ai{
+background:#1e293b;
+}
 
 .input-area{
-padding:30px 40px;
 display:flex;
-gap:15px;
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(20px);
-border-top:1px solid rgba(255,255,255,0.1);
+gap:10px;
+padding:20px;
+background:#020617;
 }
 
 input{
 flex:1;
-padding:18px;
-border-radius:14px;
+padding:14px;
 border:none;
-background:rgba(255,255,255,0.08);
+border-radius:8px;
+background:#1e293b;
 color:white;
-font-size:15px;
-outline:none;
 }
 
 button{
-padding:18px 35px;
-border-radius:14px;
+padding:14px 25px;
 border:none;
+border-radius:8px;
 background:linear-gradient(90deg,#00f5a0,#00d9f5);
-color:#0b0f19;
 font-weight:700;
 cursor:pointer;
-transition:0.3s;
-}
-
-button:hover{transform:scale(1.05)}
-
-@keyframes fade{
-from{opacity:0;transform:translateY(15px)}
-to{opacity:1;transform:translateY(0)}
-}
-
-@media(max-width:900px){
-.sidebar{display:none}
 }
 
 </style>
 </head>
+
 <body>
 
-<canvas id="bg"></canvas>
+<header>
+<div class="logo">NovaMind AI</div>
+</header>
 
-<div class="sidebar">
-<div class="logo">InfinityAI</div>
-
-<div class="menu">
-<a href="#">Chat</a>
-<a href="#">Explorar</a>
-<a href="#">Memória</a>
-<a href="#">Configurações</a>
+<div class="chat" id="chat">
+<div class="message ai">Olá. Eu sou a NovaMind AI. Como posso ajudar?</div>
 </div>
-
-<a href="#" class="upgrade">Melhorar Plano</a>
-</div>
-
-<div class="main">
-
-<div class="topbar">
-<div>Assistente de Nova Geração</div>
-<div class="status">Sistema Ativo • Performance Máxima</div>
-</div>
-
-<div class="chat" id="chat"></div>
 
 <div class="input-area">
-<input id="input" placeholder="Digite sua mensagem...">
+<input id="input" placeholder="Digite sua mensagem">
 <button onclick="send()">Enviar</button>
-</div>
-
 </div>
 
 <script>
 
-/* Particle background */
+const API_KEY = "COLOQUE_SUA_CHAVE_AQUI"
 
-const canvas=document.getElementById("bg")
-const ctx=canvas.getContext("2d")
-canvas.width=window.innerWidth
-canvas.height=window.innerHeight
+async function send(){
 
-let particles=[]
-for(let i=0;i<80;i++){
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-vx:(Math.random()-0.5)*1,
-vy:(Math.random()-0.5)*1,
-size:Math.random()*2
-})
-}
-
-function animate(){
-ctx.clearRect(0,0,canvas.width,canvas.height)
-particles.forEach(p=>{
-p.x+=p.vx
-p.y+=p.vy
-if(p.x<0||p.x>canvas.width)p.vx*=-1
-if(p.y<0||p.y>canvas.height)p.vy*=-1
-ctx.fillStyle="rgba(0,217,245,0.7)"
-ctx.beginPath()
-ctx.arc(p.x,p.y,p.size,0,Math.PI*2)
-ctx.fill()
-})
-requestAnimationFrame(animate)
-}
-animate()
-
-/* Chat system */
-
+const input=document.getElementById("input")
 const chat=document.getElementById("chat")
 
-function addMessage(text,type){
-let div=document.createElement("div")
-div.className="message "+type
-div.innerText=text
-chat.appendChild(div)
-chat.scrollTop=chat.scrollHeight
-}
+if(input.value.trim()=="") return
 
-function typeEffect(text){
-let div=document.createElement("div")
-div.className="message ai"
-chat.appendChild(div)
-let i=0
-let interval=setInterval(()=>{
-div.innerText=text.slice(0,i++)
-if(i>text.length)clearInterval(interval)
-},20)
-chat.scrollTop=chat.scrollHeight
-}
+const userText=input.value
 
-function send(){
-let input=document.getElementById("input")
-if(input.value.trim()==="")return
+chat.innerHTML+=`<div class="message user">${userText}</div>`
 
-addMessage(input.value,"user")
-let pergunta=input.value
 input.value=""
 
-setTimeout(()=>{
-typeEffect("Analisando sua mensagem com inteligência avançada...")
-},500)
-}
+chat.innerHTML+=`<div class="message ai" id="loading">Pensando...</div>`
 
-addMessage("Olá. Eu sou o InfinityAI. Como posso ajudar você hoje?","ai")
+const response = await fetch("https://api.openai.com/v1/chat/completions",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json",
+"Authorization":"Bearer "+API_KEY
+},
+
+body:JSON.stringify({
+
+model:"gpt-4o-mini",
+
+messages:[
+{role:"system",content:"Você é uma inteligência artificial útil e profissional."},
+{role:"user",content:userText}
+]
+
+})
+
+})
+
+const data = await response.json()
+
+document.getElementById("loading").remove()
+
+chat.innerHTML+=`<div class="message ai">${data.choices[0].message.content}</div>`
+
+chat.scrollTop=chat.scrollHeight
+
+}
 
 </script>
 
