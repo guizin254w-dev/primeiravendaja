@@ -35,6 +35,7 @@ align-items:center;
 justify-content:center;
 flex-direction:column;
 z-index:999;
+text-align:center;
 }
 
 #loginScreen h2{
@@ -56,6 +57,13 @@ border-radius:8px;
 background:linear-gradient(90deg,#00f5a0,#00d9f5);
 font-weight:700;
 cursor:pointer;
+margin-top:10px;
+}
+
+.senhaInfo{
+margin-top:10px;
+font-size:14px;
+opacity:0.8;
 }
 
 /* LAYOUT */
@@ -152,43 +160,27 @@ border-radius:15px;
 box-shadow:0 20px 40px rgba(0,0,0,0.5);
 }
 
-@media(max-width:900px){
-
-.container{
-flex-direction:column;
-}
-
-.sidebar{
-width:100%;
-display:flex;
-flex-wrap:wrap;
-gap:8px;
-}
-
-.lesson{
-flex:1 1 45%;
-}
-
-iframe{
-height:300px;
-}
-
-}
-
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="loginScreen">
 <h2>Área Exclusiva</h2>
+
 <input type="password" id="password" placeholder="Digite a senha">
+
 <button onclick="login()">Entrar</button>
+
+<div class="senhaInfo">
+Senha de acesso: <strong>1234p</strong>
+</div>
+
 </div>
 
 <div class="container">
 
 <div class="sidebar">
+
 <div class="logo">Curso Premium</div>
 
 <div class="progressBox">
@@ -212,9 +204,11 @@ height:300px;
 </div>
 
 <div class="main">
+
 <iframe id="player"
 src="https://www.youtube.com/embed/Pclwdyagty8"
 allowfullscreen></iframe>
+
 </div>
 
 </div>
@@ -222,26 +216,35 @@ allowfullscreen></iframe>
 <script>
 
 const totalLessons = 10
-const correctPassword = "1234" // ALTERE AQUI SUA SENHA
+const correctPassword = "1234p"
 
 function login(){
+
 const pass = document.getElementById("password").value
+
 if(pass === correctPassword){
+
 document.getElementById("loginScreen").style.display="none"
+
 }else{
+
 alert("Senha incorreta")
+
 }
+
 }
 
 function play(element,number,video){
 
 document.querySelectorAll(".lesson").forEach(l=>l.classList.remove("active"))
+
 element.classList.add("active")
 
 document.getElementById("player").src =
 "https://www.youtube.com/embed/" + video
 
 markCompleted(number, element)
+
 }
 
 function markCompleted(number, element){
@@ -249,24 +252,35 @@ function markCompleted(number, element){
 let completed = JSON.parse(localStorage.getItem("completedLessons")) || []
 
 if(!completed.includes(number)){
+
 completed.push(number)
+
 localStorage.setItem("completedLessons", JSON.stringify(completed))
+
 }
 
 element.classList.add("completed")
+
 updateProgress()
+
 }
 
 function updateProgress(){
 
 let completed = JSON.parse(localStorage.getItem("completedLessons")) || []
+
 let percent = (completed.length / totalLessons) * 100
+
 document.getElementById("progressFill").style.width = percent + "%"
 
 document.querySelectorAll(".lesson").forEach((lesson,index)=>{
+
 if(completed.includes(index+1)){
+
 lesson.classList.add("completed")
+
 }
+
 })
 
 }
