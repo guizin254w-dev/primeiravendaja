@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NovaMind AI</title>
+<title>Área de Membros Premium</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
@@ -19,70 +19,38 @@ font-family:'Inter',sans-serif;
 body{
 background:#0f172a;
 color:white;
-display:flex;
-flex-direction:column;
 height:100vh;
+overflow:hidden;
 }
 
-header{
-padding:20px;
+/* LOGIN */
+
+#loginScreen{
+position:fixed;
+width:100%;
+height:100%;
 background:#020617;
-border-bottom:1px solid rgba(255,255,255,0.1);
 display:flex;
-justify-content:space-between;
 align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:999;
 }
 
-.logo{
-font-weight:800;
-font-size:20px;
-background:linear-gradient(90deg,#00f5a0,#00d9f5);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-.chat{
-flex:1;
-overflow-y:auto;
-padding:30px;
-}
-
-.message{
+#loginScreen h2{
 margin-bottom:20px;
-padding:15px;
-border-radius:10px;
-max-width:700px;
-line-height:1.5;
 }
 
-.user{
-background:#00d9f5;
-color:black;
-margin-left:auto;
-}
-
-.ai{
-background:#1e293b;
-}
-
-.input-area{
-display:flex;
-gap:10px;
-padding:20px;
-background:#020617;
-}
-
-input{
-flex:1;
-padding:14px;
-border:none;
+#loginScreen input{
+padding:12px;
 border-radius:8px;
-background:#1e293b;
-color:white;
+border:none;
+margin-bottom:10px;
+width:250px;
 }
 
-button{
-padding:14px 25px;
+#loginScreen button{
+padding:12px 20px;
 border:none;
 border-radius:8px;
 background:linear-gradient(90deg,#00f5a0,#00d9f5);
@@ -90,74 +58,220 @@ font-weight:700;
 cursor:pointer;
 }
 
+/* LAYOUT */
+
+.container{
+display:flex;
+height:100%;
+}
+
+.sidebar{
+width:280px;
+background:#020617;
+padding:25px;
+overflow-y:auto;
+border-right:1px solid rgba(255,255,255,0.05);
+}
+
+.logo{
+font-size:22px;
+font-weight:800;
+margin-bottom:20px;
+background:linear-gradient(90deg,#00f5a0,#00d9f5);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.progressBox{
+margin-bottom:20px;
+}
+
+.progressBar{
+width:100%;
+height:8px;
+background:#1e293b;
+border-radius:10px;
+overflow:hidden;
+}
+
+.progressFill{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#00f5a0,#00d9f5);
+transition:0.3s;
+}
+
+.lesson{
+padding:14px;
+border-radius:10px;
+margin-bottom:8px;
+cursor:pointer;
+background:#111827;
+transition:0.3s;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.lesson:hover{
+background:#1e293b;
+}
+
+.lesson.active{
+background:linear-gradient(90deg,#00f5a0,#00d9f5);
+color:#0f172a;
+font-weight:700;
+}
+
+.check{
+font-size:14px;
+color:#00f5a0;
+display:none;
+}
+
+.lesson.completed .check{
+display:block;
+}
+
+/* MAIN */
+
+.main{
+flex:1;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:40px;
+}
+
+iframe{
+width:100%;
+max-width:1000px;
+height:560px;
+border:none;
+border-radius:15px;
+box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
+
+@media(max-width:900px){
+
+.container{
+flex-direction:column;
+}
+
+.sidebar{
+width:100%;
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+}
+
+.lesson{
+flex:1 1 45%;
+}
+
+iframe{
+height:300px;
+}
+
+}
+
 </style>
 </head>
-
 <body>
 
-<header>
-<div class="logo">NovaMind AI</div>
-</header>
-
-<div class="chat" id="chat">
-<div class="message ai">Olá. Eu sou a NovaMind AI. Como posso ajudar?</div>
+<!-- LOGIN -->
+<div id="loginScreen">
+<h2>Área Exclusiva</h2>
+<input type="password" id="password" placeholder="Digite a senha">
+<button onclick="login()">Entrar</button>
 </div>
 
-<div class="input-area">
-<input id="input" placeholder="Digite sua mensagem">
-<button onclick="send()">Enviar</button>
+<div class="container">
+
+<div class="sidebar">
+<div class="logo">Curso Premium</div>
+
+<div class="progressBox">
+<div>Progresso</div>
+<div class="progressBar">
+<div class="progressFill" id="progressFill"></div>
+</div>
+</div>
+
+<div class="lesson active" onclick="play(this,1,'Pclwdyagty8')">Aula 1 <span class="check">✔</span></div>
+<div class="lesson" onclick="play(this,2,'dDE66g3FptM')">Aula 2 <span class="check">✔</span></div>
+<div class="lesson" onclick="play(this,3,'emD7i6pQwrU')">Aula 3 <span class="check">✔</span></div>
+<div class="lesson" onclick="play(this,4,'jTE_M6ekV28')">Aula 4 <span class="check">✔</span></div>
+<div class="lesson" onclick="play(this,5,'YfRo5MMxkvg')">Aula 5 <span class="check">✔</span></div>
+<div class="lesson" onclick="play(this,6,'8izdzhz1zI4')">Aula 6 <span class="check">✔</span></div>
+<div class="lesson" onclick="play(this,7,'leCXcq4DJ8w')">Aula 7 <span class="check">✔</span></div>
+<div class="lesson" onclick="play(this,8,'nVGwhfmCTyg')">Aula 8 <span class="check">✔</span></div>
+<div class="lesson" onclick="play(this,9,'DvmafnZNuPc')">Aula 9 <span class="check">✔</span></div>
+<div class="lesson" onclick="play(this,10,'s7yTWVdd7G4')">Aula 10 <span class="check">✔</span></div>
+
+</div>
+
+<div class="main">
+<iframe id="player"
+src="https://www.youtube.com/embed/Pclwdyagty8"
+allowfullscreen></iframe>
+</div>
+
 </div>
 
 <script>
 
-const API_KEY = "COLOQUE_SUA_CHAVE_AQUI"
+const totalLessons = 10
+const correctPassword = "1234" // ALTERE AQUI SUA SENHA
 
-async function send(){
+function login(){
+const pass = document.getElementById("password").value
+if(pass === correctPassword){
+document.getElementById("loginScreen").style.display="none"
+}else{
+alert("Senha incorreta")
+}
+}
 
-const input=document.getElementById("input")
-const chat=document.getElementById("chat")
+function play(element,number,video){
 
-if(input.value.trim()=="") return
+document.querySelectorAll(".lesson").forEach(l=>l.classList.remove("active"))
+element.classList.add("active")
 
-const userText=input.value
+document.getElementById("player").src =
+"https://www.youtube.com/embed/" + video
 
-chat.innerHTML+=`<div class="message user">${userText}</div>`
+markCompleted(number, element)
+}
 
-input.value=""
+function markCompleted(number, element){
 
-chat.innerHTML+=`<div class="message ai" id="loading">Pensando...</div>`
+let completed = JSON.parse(localStorage.getItem("completedLessons")) || []
 
-const response = await fetch("https://api.openai.com/v1/chat/completions",{
+if(!completed.includes(number)){
+completed.push(number)
+localStorage.setItem("completedLessons", JSON.stringify(completed))
+}
 
-method:"POST",
+element.classList.add("completed")
+updateProgress()
+}
 
-headers:{
-"Content-Type":"application/json",
-"Authorization":"Bearer "+API_KEY
-},
+function updateProgress(){
 
-body:JSON.stringify({
+let completed = JSON.parse(localStorage.getItem("completedLessons")) || []
+let percent = (completed.length / totalLessons) * 100
+document.getElementById("progressFill").style.width = percent + "%"
 
-model:"gpt-4o-mini",
-
-messages:[
-{role:"system",content:"Você é uma inteligência artificial útil e profissional."},
-{role:"user",content:userText}
-]
-
+document.querySelectorAll(".lesson").forEach((lesson,index)=>{
+if(completed.includes(index+1)){
+lesson.classList.add("completed")
+}
 })
-
-})
-
-const data = await response.json()
-
-document.getElementById("loading").remove()
-
-chat.innerHTML+=`<div class="message ai">${data.choices[0].message.content}</div>`
-
-chat.scrollTop=chat.scrollHeight
 
 }
+
+updateProgress()
 
 </script>
 
