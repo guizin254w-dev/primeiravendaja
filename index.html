@@ -3,289 +3,222 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Área de Membros Premium</title>
+<title>Plataforma de Aulas Profissional</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
+/* 🌟 Estilo Global */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-body{
-background:#0f172a;
-color:white;
-height:100vh;
-overflow:hidden;
+body {
+  background: #0a0f19;
+  color: #fff;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* LOGIN */
+/* 📌 Sidebar */
 
-#loginScreen{
-position:fixed;
-width:100%;
-height:100%;
-background:#020617;
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-z-index:999;
-text-align:center;
+.sidebar {
+  width: 280px;
+  background: #08101c;
+  padding: 30px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  overflow-y: auto;
 }
 
-#loginScreen h2{
-margin-bottom:20px;
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg,#00f5a0,#00d9f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-#loginScreen input{
-padding:12px;
-border-radius:8px;
-border:none;
-margin-bottom:10px;
-width:250px;
+.lesson {
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  background: #111827;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s;
+  font-weight: 500;
 }
 
-#loginScreen button{
-padding:12px 20px;
-border:none;
-border-radius:8px;
-background:linear-gradient(90deg,#00f5a0,#00d9f5);
-font-weight:700;
-cursor:pointer;
-margin-top:10px;
+.lesson:hover {
+  background: #1f2937;
 }
 
-.senhaInfo{
-margin-top:10px;
-font-size:14px;
-opacity:0.8;
+.lesson.active {
+  background: linear-gradient(90deg,#00f5a0,#00d9f5);
+  color: #0a0f19;
+  font-weight: 700;
 }
 
-/* LAYOUT */
-
-.container{
-display:flex;
-height:100%;
+.checkmark {
+  font-size: 14px;
+  color: #00f5a0;
+  display: none;
 }
 
-.sidebar{
-width:280px;
-background:#020617;
-padding:25px;
-overflow-y:auto;
-border-right:1px solid rgba(255,255,255,0.05);
+.lesson.completed .checkmark {
+  display: block;
 }
 
-.logo{
-font-size:22px;
-font-weight:800;
-margin-bottom:20px;
-background:linear-gradient(90deg,#00f5a0,#00d9f5);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+/* 📌 Main Content */
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  background: #0a101c;
 }
 
-.progressBox{
-margin-bottom:20px;
+.video-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.progressBar{
-width:100%;
-height:8px;
-background:#1e293b;
-border-radius:10px;
-overflow:hidden;
+iframe {
+  width: 100%;
+  max-width: 960px;
+  height: 540px;
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.7);
 }
 
-.progressFill{
-height:100%;
-width:0%;
-background:linear-gradient(90deg,#00f5a0,#00d9f5);
-transition:0.3s;
+/* 📌 Estilo Responsivo */
+
+@media (max-width: 900px) {
+  body {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .lesson {
+    flex: 1 1 45%;
+    text-align: center;
+  }
+  iframe {
+    height: 320px;
+  }
 }
 
-.lesson{
-padding:14px;
-border-radius:10px;
-margin-bottom:8px;
-cursor:pointer;
-background:#111827;
-transition:0.3s;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
+/* 📌 Destaque da Aula Bônus */
 
-.lesson:hover{
-background:#1e293b;
-}
-
-.lesson.active{
-background:linear-gradient(90deg,#00f5a0,#00d9f5);
-color:#0f172a;
-font-weight:700;
-}
-
-.check{
-font-size:14px;
-color:#00f5a0;
-display:none;
-}
-
-.lesson.completed .check{
-display:block;
-}
-
-/* MAIN */
-
-.main{
-flex:1;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:40px;
-}
-
-iframe{
-width:100%;
-max-width:1000px;
-height:560px;
-border:none;
-border-radius:15px;
-box-shadow:0 20px 40px rgba(0,0,0,0.5);
+.bonus-label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffd700;
+  margin-left: 8px;
 }
 
 </style>
 </head>
+
 <body>
 
-<div id="loginScreen">
-<h2>Área Exclusiva</h2>
-
-<input type="password" id="password" placeholder="Digite a senha">
-
-<button onclick="login()">Entrar</button>
-
-<div class="senhaInfo">
-Senha de acesso: <strong>1234p</strong>
-</div>
-
-</div>
-
-<div class="container">
-
 <div class="sidebar">
+  <div class="logo">Plataforma de Aulas</div>
 
-<div class="logo">Curso Premium</div>
+  <div class="lesson active" onclick="play(this, 'Pclwdyagty8')">
+    Aula 1
+    <span class="checkmark">✔</span>
+  </div>
 
-<div class="progressBox">
-<div>Progresso</div>
-<div class="progressBar">
-<div class="progressFill" id="progressFill"></div>
-</div>
-</div>
+  <div class="lesson" onclick="play(this, 'dDE66g3FptM')">
+    Aula 2
+    <span class="checkmark">✔</span>
+  </div>
 
-<div class="lesson active" onclick="play(this,1,'Pclwdyagty8')">Aula 1 <span class="check">✔</span></div>
-<div class="lesson" onclick="play(this,2,'dDE66g3FptM')">Aula 2 <span class="check">✔</span></div>
-<div class="lesson" onclick="play(this,3,'emD7i6pQwrU')">Aula 3 <span class="check">✔</span></div>
-<div class="lesson" onclick="play(this,4,'jTE_M6ekV28')">Aula 4 <span class="check">✔</span></div>
-<div class="lesson" onclick="play(this,5,'YfRo5MMxkvg')">Aula 5 <span class="check">✔</span></div>
-<div class="lesson" onclick="play(this,6,'8izdzhz1zI4')">Aula 6 <span class="check">✔</span></div>
-<div class="lesson" onclick="play(this,7,'leCXcq4DJ8w')">Aula 7 <span class="check">✔</span></div>
-<div class="lesson" onclick="play(this,8,'nVGwhfmCTyg')">Aula 8 <span class="check">✔</span></div>
-<div class="lesson" onclick="play(this,9,'DvmafnZNuPc')">Aula 9 <span class="check">✔</span></div>
-<div class="lesson" onclick="play(this,10,'s7yTWVdd7G4')">Aula 10 <span class="check">✔</span></div>
+  <div class="lesson" onclick="play(this, 'emD7i6pQwrU')">
+    Aula 3
+    <span class="checkmark">✔</span>
+  </div>
+
+  <div class="lesson" onclick="play(this, 'jTE_M6ekV28')">
+    Aula 4
+    <span class="checkmark">✔</span>
+  </div>
+
+  <div class="lesson" onclick="play(this, 'YfRo5MMxkvg')">
+    Aula 5
+    <span class="checkmark">✔</span>
+  </div>
+
+  <div class="lesson" onclick="play(this, '8izdzhz1zI4')">
+    Aula 6
+    <span class="checkmark">✔</span>
+  </div>
+
+  <div class="lesson" onclick="play(this, 'leCXcq4DJ8w')">
+    Aula 7
+    <span class="checkmark">✔</span>
+  </div>
+
+  <div class="lesson" onclick="play(this, 'nVGwhfmCTyg')">
+    Aula 8
+    <span class="checkmark">✔</span>
+  </div>
+
+  <div class="lesson" onclick="play(this, 'DvmafnZNuPc')">
+    Aula 9
+    <span class="checkmark">✔</span>
+  </div>
+
+  <div class="lesson" onclick="play(this, 's7yTWVdd7G4')">
+    Aula 10
+    <span class="checkmark">✔</span>
+  </div>
+
+  <div class="lesson" onclick="play(this, 'qGHbdm4FmaA')">
+    Aula Bônus <span class="bonus-label">BÔNUS ⭐</span>
+  </div>
 
 </div>
 
 <div class="main">
-
-<iframe id="player"
-src="https://www.youtube.com/embed/Pclwdyagty8"
-allowfullscreen></iframe>
-
-</div>
-
+  <div class="video-container">
+    <iframe id="player" src="https://www.youtube.com/embed/Pclwdyagty8" allowfullscreen></iframe>
+  </div>
 </div>
 
 <script>
 
-const totalLessons = 10
-const correctPassword = "1234p"
+function play(element, videoID) {
+  // Marca aula ativa
+  document.querySelectorAll('.lesson').forEach(item => {
+    item.classList.remove('active');
+  });
+  element.classList.add('active');
 
-function login(){
+  // Toca o vídeo
+  document.getElementById('player').src = "https://www.youtube.com/embed/" + videoID;
 
-const pass = document.getElementById("password").value
-
-if(pass === correctPassword){
-
-document.getElementById("loginScreen").style.display="none"
-
-}else{
-
-alert("Senha incorreta")
-
+  // Marca como concluída
+  element.classList.add('completed');
 }
-
-}
-
-function play(element,number,video){
-
-document.querySelectorAll(".lesson").forEach(l=>l.classList.remove("active"))
-
-element.classList.add("active")
-
-document.getElementById("player").src =
-"https://www.youtube.com/embed/" + video
-
-markCompleted(number, element)
-
-}
-
-function markCompleted(number, element){
-
-let completed = JSON.parse(localStorage.getItem("completedLessons")) || []
-
-if(!completed.includes(number)){
-
-completed.push(number)
-
-localStorage.setItem("completedLessons", JSON.stringify(completed))
-
-}
-
-element.classList.add("completed")
-
-updateProgress()
-
-}
-
-function updateProgress(){
-
-let completed = JSON.parse(localStorage.getItem("completedLessons")) || []
-
-let percent = (completed.length / totalLessons) * 100
-
-document.getElementById("progressFill").style.width = percent + "%"
-
-document.querySelectorAll(".lesson").forEach((lesson,index)=>{
-
-if(completed.includes(index+1)){
-
-lesson.classList.add("completed")
-
-}
-
-})
-
-}
-
-updateProgress()
 
 </script>
 
