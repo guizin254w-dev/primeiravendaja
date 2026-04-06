@@ -3,116 +3,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Curso Online</title>
+<title>Área de Alunos</title>
 
 <style>
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #0f0f0f;
+    background: #111;
     color: white;
     text-align: center;
 }
 
-header {
-    padding: 40px 20px;
+.login-box {
+    margin-top: 100px;
 }
 
-h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
+input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
 }
 
-p {
-    color: #ccc;
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-    padding: 40px 20px;
-}
-
-.card {
-    background: #1c1c1c;
-    padding: 30px;
-    border-radius: 15px;
-    width: 320px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: scale(1.05);
-}
-
-.price {
-    font-size: 32px;
-    margin: 20px 0;
-    color: #00ff88;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-    text-align: left;
-}
-
-ul li {
-    margin: 10px 0;
-}
-
-.button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 14px 28px;
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
     background: #00ff88;
-    color: black;
-    text-decoration: none;
-    border-radius: 8px;
     font-weight: bold;
-    transition: 0.3s;
 }
 
-.button:hover {
-    background: #00cc6a;
-}
-
-footer {
+#aulas {
+    display: none;
     padding: 20px;
-    color: #777;
+}
+
+.video {
+    margin: 30px 0;
+}
+
+iframe {
+    width: 90%;
+    max-width: 600px;
+    height: 315px;
+    border-radius: 10px;
 }
 </style>
-
 </head>
+
 <body>
 
-<header>
-    <h1>Aprenda a Fazer Sua Primeira Venda Online</h1>
-    <p>Curso prático e direto ao ponto</p>
-</header>
+<div id="login" class="login-box">
+    <h1>Área de Alunos</h1>
+    <p>Digite a senha para acessar:</p>
+    <input type="password" id="senha" placeholder="Senha">
+    <br><br>
+    <button onclick="entrar()">Entrar</button>
+</div>
 
-<div class="container">
+<div id="aulas">
+    <h1>Curso Completo</h1>
 
-    <div class="card">
-        <h2>Curso Completo Iniciante</h2>
-        <p class="price">R$ 19,90</p>
-        <ul>
-            <li>✔ Como fazer sua primeira venda</li>
-            <li>✔ Estratégias para Instagram</li>
-            <li>✔ Técnicas simples de conversão</li>
-            <li>✔ Acesso imediato</li>
-        </ul>
-        <a href="https://pay.cakto.com.br/btxrutz_796078" class="button" target="_blank">
-            Comprar Agora
-        </a>
+    <div class="video">
+        <h3>Aula 1</h3>
+        <iframe src="https://www.youtube.com/embed/jTE_M6ekV28" allowfullscreen></iframe>
+    </div>
+
+    <div class="video">
+        <h3>Aula 2</h3>
+        <iframe src="https://www.youtube.com/embed/emD7i6pQwrU" allowfullscreen></iframe>
+    </div>
+
+    <div class="video">
+        <h3>Aula 3</h3>
+        <iframe src="https://www.youtube.com/embed/dDE66g3FptM" allowfullscreen></iframe>
+    </div>
+
+    <div class="video">
+        <h3>Aula 4</h3>
+        <iframe src="https://www.youtube.com/embed/Pclwdyagty8" allowfullscreen></iframe>
+    </div>
+
+    <div class="video">
+        <h3>Aula 5</h3>
+        <iframe src="https://www.youtube.com/embed/8izdzhz1zI4" allowfullscreen></iframe>
+    </div>
+
+    <div class="video">
+        <h3>Aula 6</h3>
+        <iframe src="https://www.youtube.com/embed/YfRo5MMxkvg" allowfullscreen></iframe>
+    </div>
+
+    <div class="video">
+        <h3>Aula 7</h3>
+        <iframe src="https://www.youtube.com/embed/leCXcq4DJ8w" allowfullscreen></iframe>
+    </div>
+
+    <div class="video">
+        <h3>Aula 8</h3>
+        <iframe src="https://www.youtube.com/embed/s7yTWVdd7G4" allowfullscreen></iframe>
+    </div>
+
+    <div class="video">
+        <h3>Aula 9</h3>
+        <iframe src="https://www.youtube.com/embed/DvmafnZNuPc" allowfullscreen></iframe>
+    </div>
+
+    <div class="video">
+        <h3>Aula 10</h3>
+        <iframe src="https://www.youtube.com/embed/nVGwhfmCTyg" allowfullscreen></iframe>
+    </div>
+
+    <div class="video">
+        <h3>Aula Bônus</h3>
+        <iframe src="https://www.youtube.com/embed/qGHbdm4FmaA" allowfullscreen></iframe>
     </div>
 
 </div>
 
-<footer>
-    © 2026 - Todos os direitos reservados
-</footer>
+<script>
+function entrar() {
+    var senha = document.getElementById("senha").value;
+    if (senha === "1234") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("aulas").style.display = "block";
+    } else {
+        alert("Senha incorreta!");
+    }
+}
+</script>
 
 </body>
 </html>
