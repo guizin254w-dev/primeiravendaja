@@ -1,138 +1,276 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Área de Alunos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Grande Brasil RP - O servidor de Roleplay mais sólido, justo e com a verdadeira cara do Brasil. Construa esse projeto com a gente!">
+    <title>Grande Brasil RP | Construindo o futuro do RP brasileiro</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #111;
-    color: white;
-    text-align: center;
-}
+        :root {
+            --verde-principal: #0E5A3E;
+            --verde-escuro: #0A422E;
+            --amarelo-destaque: #FFC107;
+            --amarelo-claro: #FFDB4D;
+            --cinza-escuro: #212121;
+            --cinza-claro: #F5F5F5;
+            --branco: #FFFFFF;
+            --sombra-padrao: 0 4px 20px rgba(0,0,0,0.15);
+        }
 
-.login-box {
-    margin-top: 100px;
-}
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--cinza-claro); color: var(--cinza-escuro); line-height: 1.7; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
 
-input {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: none;
-}
+        .botao-principal {
+            display: inline-block;
+            background-color: var(--amarelo-destaque);
+            color: var(--verde-principal);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--sombra-padrao);
+        }
+        .botao-principal:hover { background-color: var(--amarelo-claro); transform: translateY(-2px); }
 
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    background: #00ff88;
-    font-weight: bold;
-}
+        .botao-secundario {
+            background-color: transparent;
+            border: 2px solid var(--amarelo-destaque);
+            color: var(--amarelo-destaque);
+            padding: 0.9rem 1.8rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .botao-secundario:hover { background-color: var(--amarelo-destaque); color: var(--verde-principal); }
 
-#aulas {
-    display: none;
-    padding: 20px;
-}
+        .secao-titulo {
+            font-size: 2.2rem;
+            color: var(--verde-principal);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .secao-titulo::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background-color: var(--amarelo-destaque);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
 
-.video {
-    margin: 30px 0;
-}
+        /* CABEÇALHO */
+        header {
+            background-color: rgba(14, 90, 62, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        .navegacao { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; }
+        .logo { font-size: 1.7rem; font-weight: 900; color: var(--amarelo-destaque); text-decoration: none; }
+        .menu-principal { display: flex; list-style: none; gap: 2rem; align-items: center; }
+        .menu-principal a { color: var(--branco); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .menu-principal a:hover { color: var(--amarelo-destaque); }
+        .menu-botao { background-color: var(--amarelo-destaque); color: var(--verde-principal) !important; padding: 0.7rem 1.2rem; border-radius: 6px; font-weight: 700; }
+        .botao-menu { display: none; background: none; border: none; color: var(--branco); font-size: 1.8rem; cursor: pointer; }
 
-iframe {
-    width: 90%;
-    max-width: 600px;
-    height: 315px;
-    border-radius: 10px;
-}
-</style>
+        @media (max-width: 768px) {
+            .botao-menu { display: block; }
+            .menu-principal { position: absolute; top: 100%; left: 0; width: 100%; background-color: var(--verde-escuro); flex-direction: column; padding: 2rem 0; gap: 1.5rem; transform: translateY(-150%); transition: transform 0.4s ease; }
+            .menu-principal.aberto { transform: translateY(0); }
+        }
+
+        /* DESTAQUE PRINCIPAL */
+        .destaque {
+            margin-top: 80px;
+            padding: 6rem 0;
+            background: linear-gradient(rgba(10, 66, 46, 0.9), rgba(14, 90, 62, 0.8)), url('https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+            color: var(--branco);
+            text-align: center;
+        }
+        .destaque h1 { font-size: 3rem; margin-bottom: 1.5rem; color: var(--amarelo-destaque); line-height: 1.3; }
+        .destaque p { font-size: 1.25rem; max-width: 900px; margin: 0 auto 2.5rem auto; opacity: 0.95; }
+        .destaque-botoes { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+
+        /* SOBRE O PROJETO */
+        .sobre { padding: 5rem 0; background-color: var(--branco); }
+        .sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+        .sobre-texto h3 { color: var(--verde-principal); font-size: 1.5rem; margin-bottom: 1.2rem; }
+        .sobre-lista { list-style: none; margin-top: 1.5rem; }
+        .sobre-lista li { padding: 0.5rem 0; display: flex; align-items: center; gap: 0.8rem; }
+        .sobre-lista li::before { content: '✅'; font-size: 1.2rem; }
+        .sobre-imagem { background-color: var(--cinza-claro); border-radius: 12px; height: 350px; display: flex; align-items: center; justify-content: center; color: var(--verde-principal); font-weight: 700; font-size: 1.3rem; }
+        @media (max-width: 768px) { .sobre-grid { grid-template-columns: 1fr; } }
+
+        /* EQUIPE SELETIVA */
+        .equipe { padding: 5rem 0; background-color: var(--cinza-claro); }
+        .vagas-card { background-color: var(--branco); padding: 2.5rem; border-radius: 12px; box-shadow: var(--sombra-padrao); text-align: center; margin-bottom: 3rem; }
+        .contador-vagas { font-size: 2.5rem; font-weight: 900; color: var(--verde-principal); margin: 1rem 0; }
+        .contador-vagas span { color: var(--amarelo-destaque); }
+        .passos-selecao { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .passo-card { background-color: var(--branco); padding: 2rem; border-radius: 10px; text-align: center; box-shadow: var(--sombra-padrao); transition: transform 0.3s ease; }
+        .passo-card:hover { transform: translateY(-8px); }
+        .passo-numero { width: 50px; height: 50px; background-color: var(--verde-principal); color: var(--amarelo-destaque); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 900; margin: 0 auto 1.2rem auto; }
+        .passo-card h4 { color: var(--verde-principal); margin-bottom: 1rem; font-size: 1.2rem; }
+
+        /* VALORES */
+        .regras { padding: 5rem 0; background-color: var(--verde-principal); color: var(--branco); }
+        .regras .secao-titulo { color: var(--amarelo-destaque); }
+        .regras-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .regra-card { background-color: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--amarelo-destaque); }
+        .regra-card h4 { color: var(--amarelo-destaque); margin-bottom: 1rem; font-size: 1.2rem; }
+
+        /* CONTATO */
+        .contato { padding: 5rem 0; background-color: var(--branco); }
+        .contato-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; text-align: center; }
+        .contato-item { padding: 2rem; border-radius: 10px; background-color: var(--cinza-claro); }
+        .contato-item h4 { color: var(--verde-principal); margin-bottom: 1rem; }
+
+        /* RODAPÉ */
+        footer { background-color: var(--cinza-escuro); color: var(--branco); padding: 3rem 0 1.5rem 0; text-align: center; }
+        .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .footer-links a { color: var(--amarelo-destaque); text-decoration: none; transition: color 0.3s; }
+        .copyright { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; font-size: 0.9rem; opacity: 0.7; }
+    </style>
 </head>
-
 <body>
 
-<div id="login" class="login-box">
-    <h1>Área de Alunos</h1>
-    <p>Digite a senha para acessar:</p>
-    <input type="password" id="senha" placeholder="Senha">
-    <br><br>
-    <button onclick="entrar()">Entrar</button>
-</div>
-
-<div id="aulas">
-    <h1>Curso Completo</h1>
-
-    <div class="video">
-        <h3>Aula 1</h3>
-        <iframe src="https://www.youtube.com/embed/jTE_M6ekV28" allowfullscreen></iframe>
+<!-- CABEÇALHO -->
+<header>
+    <div class="container">
+        <nav class="navegacao">
+            <a href="#" class="logo">GRANDE BRASIL RP</a>
+            <button class="botao-menu" id="botaoMenu">☰</button>
+            <ul class="menu-principal" id="menuPrincipal">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#equipe">Equipe Seletiva</a></li>
+                <li><a href="#regras">Valores</a></li>
+                <li><a href="#contato">Contato</a></li>
+                <li><a href="https://forms.gle/CLjDnhdyErGbdJ3o6" target="_blank" rel="noopener noreferrer" class="menu-botao">INSCREVER-SE</a></li>
+            </ul>
+        </nav>
     </div>
+</header>
 
-    <div class="video">
-        <h3>Aula 2</h3>
-        <iframe src="https://www.youtube.com/embed/emD7i6pQwrU" allowfullscreen></iframe>
+<!-- INICIO -->
+<section class="destaque" id="inicio">
+    <div class="container">
+        <h1>CONSTRUINDO O SERVIDOR DE RP MAIS COM A CARA DO BRASIL</h1>
+        <p>Sem promessas vazias, sem bagunça e feito para durar. Estamos montando a Equipe Seletiva para criar um projeto justo, sólido e verdadeiramente brasileiro — com oportunidade para quem já sabe e para quem quer aprender com dedicação.</p>
+        <div class="destaque-botoes">
+            <a href="https://forms.gle/CLjDnhdyErGbdJ3o6" target="_blank" rel="noopener noreferrer" class="botao-principal">FAZER PARTE DA EQUIPE</a>
+            <a href="#sobre" class="botao-secundario">CONHECER O PROJETO</a>
+        </div>
     </div>
+</section>
 
-    <div class="video">
-        <h3>Aula 3</h3>
-        <iframe src="https://www.youtube.com/embed/dDE66g3FptM" allowfullscreen></iframe>
+<!-- SOBRE -->
+<section class="sobre" id="sobre">
+    <div class="container">
+        <h2 class="secao-titulo">SOBRE O GRANDE BRASIL RP</h2>
+        <div class="sobre-grid">
+            <div class="sobre-texto">
+                <h3>O que nos torna diferentes?</h3>
+                <p>Somos um servidor de FiveM Roleplay focado 100% na realidade, cultura e jeito brasileiro de ser. Não vamos copiar modelos prontos ou prometer o que não podemos cumprir: vamos construir tudo do zero, com calma, qualidade e transparência.</p>
+                <ul class="sobre-lista">
+                    <li>Mapas adaptados à realidade nacional</li>
+                    <li>Regras justas e economia equilibrada</li>
+                    <li>Oportunidade para iniciantes e experientes</li>
+                    <li>Total transparência em todas as etapas</li>
+                </ul>
+            </div>
+            <div class="sobre-imagem">🇧🇷 PROJETO 100% BRASILEIRO</div>
+        </div>
     </div>
+</section>
 
-    <div class="video">
-        <h3>Aula 4</h3>
-        <iframe src="https://www.youtube.com/embed/Pclwdyagty8" allowfullscreen></iframe>
+<!-- EQUIPE SELETIVA -->
+<section class="equipe" id="equipe">
+    <div class="container">
+        <h2 class="secao-titulo">EQUIPE SELETIVA</h2>
+        <div class="vagas-card">
+            <h3>INSCRIÇÕES ABERTAS AGORA!</h3>
+            <div class="contador-vagas">Vagas: <span>Abertas</span></div>
+            <p>Link oficial e seguro do formulário:</p>
+            <br>
+            <a href="https://forms.gle/CLjDnhdyErGbdJ3o6" target="_blank" rel="noopener noreferrer" class="botao-principal">ACESSAR FORMULÁRIO</a>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">https://forms.gle/CLjDnhdyErGbdJ3o6</p>
+        </div>
+        <h3 style="text-align: center; color: var(--verde-principal); margin-bottom: 2rem;">Como funciona?</h3>
+        <div class="passos-selecao">
+            <div class="passo-card"><div class="passo-numero">1</div><h4>Preencha</h4><p>Responda com sinceridade no formulário oficial.</p></div>
+            <div class="passo-card"><div class="passo-numero">2</div><h4>Análise</h4><p>Revisamos sua inscrição em até 3 dias úteis.</p></div>
+            <div class="passo-card"><div class="passo-numero">3</div><h4>Resultado</h4><p>Entramos em contato por e-mail.</p></div>
+            <div class="passo-card"><div class="passo-numero">4</div><h4>Comece</h4><p>Aprovados já começam a construir conosco!</p></div>
+        </div>
     </div>
+</section>
 
-    <div class="video">
-        <h3>Aula 5</h3>
-        <iframe src="https://www.youtube.com/embed/8izdzhz1zI4" allowfullscreen></iframe>
+<!-- VALORES -->
+<section class="regras" id="regras">
+    <div class="container">
+        <h2 class="secao-titulo">NOSSOS VALORES</h2>
+        <div class="regras-grid">
+            <div class="regra-card"><h4>✅ Sem mentiras</h4><p>Não prometemos o que não podemos cumprir.</p></div>
+            <div class="regra-card"><h4>✅ Respeito</h4><p>Todos tem valor, independente de experiência.</p></div>
+            <div class="regra-card"><h4>✅ Qualidade</h4><p>Melhor devagar bem feito do que rápido com erros.</p></div>
+            <div class="regra-card"><h4>✅ Transparência</h4><p>Tudo o que fazemos é compartilhado com a equipe.</p></div>
+        </div>
     </div>
+</section>
 
-    <div class="video">
-        <h3>Aula 6</h3>
-        <iframe src="https://www.youtube.com/embed/YfRo5MMxkvg" allowfullscreen></iframe>
+<!-- CONTATO -->
+<section class="contato" id="contato">
+    <div class="container">
+        <h2 class="secao-titulo">CONTATO</h2>
+        <div class="contato-grid">
+            <div class="contato-item"><h4>📧 E-mail</h4><p>contato@grandebrasilrp.com.br</p></div>
+            <div class="contato-item"><h4>⚠️ AVISO</h4><p>Não cobramos taxa nenhuma para participar! Qualquer pedido de dinheiro é golpe.</p></div>
+        </div>
     </div>
+</section>
 
-    <div class="video">
-        <h3>Aula 7</h3>
-        <iframe src="https://www.youtube.com/embed/leCXcq4DJ8w" allowfullscreen></iframe>
+<!-- RODAPÉ -->
+<footer>
+    <div class="container">
+        <div class="footer-links">
+            <a href="#inicio">Início</a>
+            <a href="#sobre">Sobre</a>
+            <a href="https://forms.gle/CLjDnhdyErGbdJ3o6" target="_blank" rel="noopener noreferrer">Formulário</a>
+            <a href="#contato">Contato</a>
+        </div>
+        <div class="copyright">© 2026 Grande Brasil RP | Todos os direitos reservados.</div>
     </div>
-
-    <div class="video">
-        <h3>Aula 8</h3>
-        <iframe src="https://www.youtube.com/embed/s7yTWVdd7G4" allowfullscreen></iframe>
-    </div>
-
-    <div class="video">
-        <h3>Aula 9</h3>
-        <iframe src="https://www.youtube.com/embed/DvmafnZNuPc" allowfullscreen></iframe>
-    </div>
-
-    <div class="video">
-        <h3>Aula 10</h3>
-        <iframe src="https://www.youtube.com/embed/nVGwhfmCTyg" allowfullscreen></iframe>
-    </div>
-
-    <div class="video">
-        <h3>Aula Bônus</h3>
-        <iframe src="https://www.youtube.com/embed/qGHbdm4FmaA" allowfullscreen></iframe>
-    </div>
-
-</div>
+</footer>
 
 <script>
-function entrar() {
-    var senha = document.getElementById("senha").value;
-    if (senha === "1234") {
-        document.getElementById("login").style.display = "none";
-        document.getElementById("aulas").style.display = "block";
-    } else {
-        alert("Senha incorreta!");
-    }
-}
+    // MENU MOBILE
+    const botaoMenu = document.getElementById('botaoMenu');
+    const menuPrincipal = document.getElementById('menuPrincipal');
+    botaoMenu.addEventListener('click', () => menuPrincipal.classList.toggle('aberto'));
+    document.querySelectorAll('.menu-principal a').forEach(link => link.addEventListener('click', () => menuPrincipal.classList.remove('aberto')));
 </script>
 
 </body>
